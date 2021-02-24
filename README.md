@@ -12,7 +12,9 @@
 <!-- [![](https://img.shields.io/github/release/egemenertugrul/LuxVR) ](https://github.com/egemenertugrul/LuxVR/releases) -->
 
 ## Overview
+<p style='text-align: justify;'>
 LuxVR is a night mode application for VR. It decreases blue light emitted by your head-mounted display (HMD) and reduces eyestrain during late hours or long time use in virtual reality. It makes the color of the HMD display adapt to the time of day with respect to your location to help you control your natural sleep-and-wake cycle. Just start the application and it will keep running in the background while you play other VR games/applications.
+<p>
 
 ## Demo
 <p align="center">
@@ -20,7 +22,10 @@ LuxVR is a night mode application for VR. It decreases blue light emitted by you
 </p>
 
 ## Compatibility
+<p style='text-align: justify;'>
 LuxVR uses OpenVR SDK, which means that only some HMDs are natively supported, namely: Valve Index, HTC Vive, HTC Vive Pro. This application was tested on HTC Vive and Huawei VR2. 
+</p>
+
 [**Testers with other HMDs are welcome!**](##Contribution)
 
 ## Contribution
