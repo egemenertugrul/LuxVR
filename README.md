@@ -15,6 +15,9 @@
 <p style='text-align: justify;'>
 LuxVR is a night mode application for VR. It decreases blue light emitted by your head-mounted display (HMD) and reduces eyestrain during late hours or long time use in virtual reality. It makes the color of the HMD display adapt to the time of day with respect to your location to help you control your natural sleep-and-wake cycle. Just start the application and it will keep running in the background while you play other VR games/applications.
 <p>
+    
+## Install
+For the majority of users, it is recommended to simply install it through [Steam](https://store.steampowered.com/app/732230/LuxVR/).
 
 ## Demo
 <p align="center">
