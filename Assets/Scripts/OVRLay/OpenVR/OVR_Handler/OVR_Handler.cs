@@ -64,6 +64,11 @@ public partial class OVR_Handler : System.IDisposable
         return OpenVRManifest.LoadOpenVRManifestSettings().appKey; // "steam.overlay.732230"
     }
 
+    private string GetApplicationName()
+    {
+        return "LuxVR"; // TODO: refactor
+    }
+
     public void GetOpenVRExistingInterfaces()
     {
         _Compositor = OpenVR.Compositor;

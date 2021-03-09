@@ -1,6 +1,7 @@
 ﻿using Lux.Domain;
 using Lux.Extensions;
 using Lux.Services;
+using Lux.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Lux
         public Canvas DashboardUICanvas;
         public ColorOverlay ActiveOverlay;
 
+        [HideInInspector] public bool IsOn;
         [HideInInspector] public bool IsOverlayMode;
         [HideInInspector] public bool IsAutorunMode; // TODO: Better put them in a Config class
 
@@ -32,7 +34,12 @@ namespace Lux
 
         private bool connectedToOpenVR;
 
-        public bool IsEnabled { get; set; } = true;
+        private bool isEnabled = false;
+        public bool IsEnabled { get => isEnabled; 
+            set { 
+                isEnabled = value;
+                ((MainSectionUIController)UIManager.Instance.MainSection).enableDisableButton.IsEnabled = isEnabled; // TODO: Refactor
+            } }
 
         public bool IsPaused { get; private set; }
 
@@ -136,6 +143,7 @@ namespace Lux
                 return CycleState.Transition;
             }
         }
+
         private SolarTimes _lastSolarTimes;
 
         void Awake()
@@ -276,6 +284,7 @@ namespace Lux
             PlayerPrefs.SetFloat("Day_Brightness", (float)_settingsService.DayBrightness);
             PlayerPrefs.SetFloat("Night_Brightness", (float)_settingsService.NightBrightness);
 
+            PlayerPrefsExtensions.SetBool("Is_Enabled", IsEnabled);
             PlayerPrefsExtensions.SetBool("Is_Overlay", IsOverlayMode);
             PlayerPrefsExtensions.SetBool("Is_Autorun", IsAutorunMode);
         }
@@ -300,6 +309,12 @@ namespace Lux
                 _settingsService.DayBrightness = PlayerPrefs.GetFloat("Day_Brightness");
                 _settingsService.NightBrightness = PlayerPrefs.GetFloat("Night_Brightness");
             }
+
+            if (PlayerPrefs.HasKey("Is_Enabled"))
+            {
+                IsEnabled = PlayerPrefsExtensions.GetBool("Is_Enabled");
+            }
+
 
             if (PlayerPrefs.HasKey("Is_Overlay"))
             {

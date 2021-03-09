@@ -1,5 +1,6 @@
 ﻿using Coffee.UIEffects;
 using Lux.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,9 @@ public class ToggleButtonController : MonoBehaviour
         {
             isEnabled = value;
 
+            SetColors();
+            StartCoroutine(ColorLerp(new Color[] { color1, color2 }, new Ref<UIGradient>(BackgroundImage)));
+
             if (isEnabled)
             {
                 animator.SetTrigger("Enable");
@@ -38,8 +42,6 @@ public class ToggleButtonController : MonoBehaviour
             {
                 animator.SetTrigger("Disable");
             };
-
-            onClick.Invoke(isEnabled);
         }
     }
 
@@ -49,12 +51,11 @@ public class ToggleButtonController : MonoBehaviour
         if (onClick == null)
             onClick = new OnClickEvent();
         animator = GetComponent<Animator>();
+        //IsEnabled = IsEnabledByDefault;
     }
 
     void Start()
     {
-        IsEnabled = IsEnabledByDefault;
-
         SetColors();
         BackgroundImage.color1 = color1;
         BackgroundImage.color2 = color2;
@@ -77,8 +78,7 @@ public class ToggleButtonController : MonoBehaviour
     public void OnToggleButtonClicked()
     {
         IsEnabled = !IsEnabled;
-        SetColors();
-        StartCoroutine(ColorLerp(new Color[] { color1, color2 }, new Ref<UIGradient>(BackgroundImage)));
+        onClick.Invoke(isEnabled);
     }
 
     private IEnumerator ColorLerp(Color[] targetColors, Ref<UIGradient> targetObject)

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Valve.VR;
 
-public partial class OVR_Overlay 
+public partial class OVR_Overlay
 {
     public bool UpdateCurrentOverlay()
     {
@@ -25,12 +25,12 @@ public partial class OVR_Overlay
         return !ErrorCheck(error);
     }
 
-    public bool HideOverlay() 
+    public bool HideOverlay()
     {
         overlayVisible = false;
         return !ErrorCheck(error);
     }
-    public bool ShowOverlay() 
+    public bool ShowOverlay()
     {
         overlayVisible = true;
         return !ErrorCheck(error);
@@ -38,15 +38,15 @@ public partial class OVR_Overlay
 
     public bool ClearOverlayTexture()
     {
-        if(OverlayExists && validHandle)
+        if (OverlayExists && validHandle)
             error = Overlay.ClearOverlayTexture(_overlayHandle);
-        
+
         return !ErrorCheck(error);
     }
 
     public bool ClearOverlayThumbnailTexture()
     {
-        if(OverlayExists && validHandle && overlayIsDashboard)
+        if (OverlayExists && validHandle && overlayIsDashboard)
             error = Overlay.ClearOverlayTexture(_overlayThumbnailHandle);
 
         return !ErrorCheck(error);
@@ -56,8 +56,8 @@ public partial class OVR_Overlay
     public bool OpenKeyboard(string dscrp = "", string fillTxt = "", bool minimal = false)
     {
         _isMinimal = minimal;
-        
-        if(OverlayExists)
+
+        if (OverlayExists)
             error = Overlay.ShowKeyboard(0, 0, dscrp, 256, fillTxt, minimal, 0);
 
         return !ErrorCheck(error);
@@ -65,7 +65,7 @@ public partial class OVR_Overlay
 
     public void CloseKeyboard()
     {
-        if(OverlayExists)
+        if (OverlayExists)
             Overlay.HideKeyboard();
     }
 
@@ -74,15 +74,15 @@ public partial class OVR_Overlay
     {
         bool err = (error != EVROverlayError.None);
 
-        if(err)
+        if (err)
             Debug.Log("Error: " + Overlay.GetOverlayErrorNameFromEnum(error));
 
         return err;
     }
 
-    public void VRShutdown() 
+    public void VRShutdown()
     {
-       
+
     }
 
     public OVR_Overlay()
@@ -98,29 +98,33 @@ public partial class OVR_Overlay
 
     public virtual bool CreateOverlay()
     {
-        if(!OverlayExists)
-            return ( _created = false );
+        if (!OverlayExists)
+            return (_created = false);
 
-        if(_overlayIsDashboard)
+        if (_overlayIsDashboard)
+        {
             error = Overlay.CreateDashboardOverlay(_overlayKey, _overlayName, ref _overlayHandle, ref _overlayThumbnailHandle);
+            Overlay.SetOverlayFromFile(_overlayThumbnailHandle, Application.dataPath + "/thumbicon.png");
+        }
         else
+        {
             error = Overlay.CreateOverlay(_overlayKey, _overlayName, ref _overlayHandle);
-
+        }
         bool allGood = !ErrorCheck(error);
 
-        return ( _created = allGood );
+        return (_created = allGood);
     }
 
-    public void UpdateOverlay() 
+    public void UpdateOverlay()
     {
-        while(PollNextOverlayEvent(ref pEvent))
+        while (PollNextOverlayEvent(ref pEvent))
             DigestEvent(pEvent);
     }
 
     public bool DestroyOverlay()
     {
-        if(!_created || !OverlayExists || !validHandle)
-            return true;   
+        if (!_created || !OverlayExists || !validHandle)
+            return true;
 
         error = Overlay.DestroyOverlay(_overlayHandle);
         _created = false;

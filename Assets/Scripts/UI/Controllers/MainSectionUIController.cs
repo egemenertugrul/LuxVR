@@ -58,20 +58,12 @@ namespace Lux.UI
         }
         void Update()
         {
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    OnCyclePreviewButtonClicked(); // TEST
-            //}
+
         }
 
         internal override void UpdateUI()
         {
             radialProgressBarUI.UpdateAllView();
         }
-
-        //public void OnAboutButtonClicked()
-        //{
-
-        //}
     }
 }
