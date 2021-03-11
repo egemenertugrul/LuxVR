@@ -79,6 +79,6 @@ OR
   
 ## License
 
-LuxVR is released under terms of the [GPL v3](https://github.com/egemenertugrul/LuxVR/LICENSE) license.
+LuxVR is released under terms of the [GPL v3](https://github.com/egemenertugrul/LuxVR/blob/main/LICENSE) license.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/GPLv3_Logo.svg" width="15%">
