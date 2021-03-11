@@ -20,6 +20,10 @@ namespace Lux
         private SettingsService _settingsService = new SettingsService();
         private GammaService _gammaService;
 
+        public float LuxConfigUpdateRate = 0.05f;
+        public int ApplicationIdleFrameRate = 10;
+        public int ApplicationTargetFrameRate = 91;
+
         public Canvas DashboardUICanvas;
         public ColorOverlay ActiveOverlay;
 
@@ -145,9 +149,13 @@ namespace Lux
         }
 
         private SolarTimes _lastSolarTimes;
+        private bool isUpdating;
+        private float frameTime;
 
         void Awake()
         {
+            OnOverlayInvisible();
+
             OVRHandler.onOpenVRChange += OnOpenVRChange;
         }
 
@@ -187,14 +195,18 @@ namespace Lux
 
         void StartUpdate()
         {
-            InvokeRepeating("UpdateInstant", 0f, 0.05f);
-            InvokeRepeating("UpdateConfiguration", 0f, 0.05f);
+            isUpdating = true;
+
+            //InvokeRepeating("UpdateInstant", 0f, 0.05f);
+            //InvokeRepeating("UpdateConfiguration", 0f, 0.05f);
         }
 
         void StopUpdate()
         {
-            CancelInvoke("UpdateInstant");
-            CancelInvoke("UpdateConfiguration");
+            isUpdating = false;
+
+            //CancelInvoke("UpdateInstant");
+            //CancelInvoke("UpdateConfiguration");
         }
 
         internal void ToggleOverlay(bool isOn)
@@ -245,7 +257,6 @@ namespace Lux
             CurrentConfiguration = isSmooth
                 ? CurrentConfiguration.StepTo(TargetConfiguration, 30, 0.008)
                 : TargetConfiguration;
-
 
 
             if (IsOverlayMode)
@@ -326,6 +337,35 @@ namespace Lux
                 IsAutorunMode = PlayerPrefsExtensions.GetBool("Is_Autorun");
             }
         }
+
+        public void OnOverlayVisible()
+        {
+            Application.targetFrameRate = ApplicationTargetFrameRate;
+            QualitySettings.vSyncCount = 1;
+        }
+
+        public void OnOverlayInvisible()
+        {
+            Application.targetFrameRate = ApplicationIdleFrameRate;
+            QualitySettings.vSyncCount = 0;
+        }
+
+        private void Update()
+        {
+            if (isUpdating)
+            {
+                frameTime += Time.deltaTime;
+                if(frameTime > LuxConfigUpdateRate)
+                {
+                    frameTime = 0;
+                    UpdateInstant();
+                    UpdateConfiguration();
+
+                    print(Application.targetFrameRate);
+                }
+            }
+        }
+
 
         internal void CloseApplication()
         {

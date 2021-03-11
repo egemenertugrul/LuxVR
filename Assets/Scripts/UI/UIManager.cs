@@ -8,9 +8,6 @@ namespace Lux.UI
     public class UIManager : Singleton<UIManager>
     {
         public Unity_Overlay DashboardOverlay;
-        //public Vector2 ShrunkenSize = new Vector2(60, 65), ExpandedSize = new Vector2(115.55f, 65);
-        //public float ViewSizeTransitionDuration = 0.2f;
-        //public int PreferredResolutionHeight = 720;
 
         public UIController MainSection, SettingsSection, AboutSection;
         public CanvasGroup ModalBackground;
@@ -22,8 +19,6 @@ namespace Lux.UI
 
         private FadeInOutUI mb_fio;
         private ClickableImage mb_ci;
-        //private bool isExpanded;
-
 
         void Awake()
         {
@@ -81,72 +76,13 @@ namespace Lux.UI
             mb_fio.FadeOut(true);
             activeModalView?.Hide();
             activeModalView = null;
-            //ShrinkView(() =>
-            //{
-            //    isExpanded = false;
-            //});
         }
-
-        //public void ExpandView(Action callback = null)
-        //{
-        //    if (isExpanded)
-        //    {
-        //        return;
-        //    }
-        //    StartCoroutine(ChangeViewSizeCoroutine(true, ExpandedSize, callback));
-        //}
-
-        //public void ShrinkView(Action callback = null)
-        //{
-        //    if (!isExpanded)
-        //    {
-        //        return;
-        //    }
-        //    StartCoroutine(ChangeViewSizeCoroutine(false, ShrunkenSize, callback));
-        //}
-
-        //private int WidthFromAspectRatio(float ar, int height)
-        //{
-        //    return (int)Mathf.Floor(ar * height);
-        //}
-
-        //private IEnumerator ChangeViewSizeCoroutine(bool expand, Vector2 targetSize, Action callback)
-        //{
-        //    Vector2 initialValue;
-
-        //    if (expand)
-        //    {
-        //        initialValue = ShrunkenSize;
-        //    }
-        //    else
-        //    {
-        //        initialValue = ExpandedSize;
-        //    }
-
-        //    for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / ViewSizeTransitionDuration)
-        //    {
-        //        Vector2 newSize = Vector2.Lerp(initialValue, targetSize, t);
-
-        //        DashboardOverlay.renderTexWidthOverride = WidthFromAspectRatio((newSize.x / newSize.y), PreferredResolutionHeight);
-        //        DashboardOverlay.renderTexHeightOverride = PreferredResolutionHeight;
-        //        DashboardOverlay.ResetTexture();
-        //        yield return new WaitForEndOfFrame();
-        //    }
-
-        //    DashboardOverlay.renderTexWidthOverride = WidthFromAspectRatio((targetSize.x / targetSize.y), PreferredResolutionHeight);
-        //    DashboardOverlay.renderTexHeightOverride = PreferredResolutionHeight;
-        //    DashboardOverlay.ResetTexture();
-
-        //    callback?.Invoke();
-        //}
-
 
         private void Update()
         {
             if (isUpdating)
             {
                 MainSection.UpdateUI();
-                //SettingsSection.Update();
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Valve.VR;
@@ -59,6 +60,7 @@ public partial class OVR_Handler
     }
 
     private OVR_Overlay_Handler _overlayHandler;
+
     public OVR_Overlay_Handler overlayHandler 
     { 
         get 

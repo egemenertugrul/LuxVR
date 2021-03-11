@@ -35,6 +35,10 @@ public class Unity_SteamVR_Handler : MonoBehaviour
 	public UnityEvent onDashboardOpen = new UnityEvent();
 	public UnityEvent onDashboardClose = new UnityEvent();
 
+	[Space(10)]
+
+	public UnityEvent onOverlayAppOpen = new UnityEvent();
+	public UnityEvent onOverlayAppClose = new UnityEvent();
 
 	[HideInInspector] public OVR_Handler ovrHandler = OVR_Handler.instance;
 
@@ -49,7 +53,7 @@ public class Unity_SteamVR_Handler : MonoBehaviour
 		lastSteamVRPollTime = steamVRPollTime + 1f;
 		ovrHandler.onOpenVRChange += OnOpenVRChange;
 
-		Application.targetFrameRate = 91;
+		//Application.targetFrameRate = 91;
 
 		ovrHandler.onVREvent += VREventHandler;
 	}
@@ -72,6 +76,13 @@ public class Unity_SteamVR_Handler : MonoBehaviour
 			onDashboardOpen.Invoke();
 		else
 			onDashboardClose.Invoke();
+	}
+	void OnOverlayAppChange(bool open)
+	{
+		if (open)
+			onOverlayAppOpen.Invoke();
+		else
+			onOverlayAppClose.Invoke();
 	}
 
 	void Update() 
@@ -143,6 +154,7 @@ public class Unity_SteamVR_Handler : MonoBehaviour
 				
 				onSteamVRConnect.Invoke();
 				ovrHandler.onDashboardChange += OnDashboardChange;
+				ovrHandler.onOverlayAppChange += OnOverlayAppChange;
 
 				return true;
 			}		

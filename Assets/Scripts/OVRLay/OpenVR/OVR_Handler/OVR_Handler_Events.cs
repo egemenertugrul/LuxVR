@@ -7,6 +7,7 @@ public partial class OVR_Handler
     public OpenVRChange onOpenVRChange = delegate(bool connected){};
     public StandbyChange onStandbyChange = delegate(bool inStandbyMode){};
     public DashboardChange onDashboardChange = delegate(bool open){};
+    public OverlayAppChange onOverlayAppChange = delegate(bool open) {};
     public ChaperoneChange onChaperoneChange = delegate(){};
 
     private bool PollNextEvent(ref VREvent_t pEvent)
@@ -21,7 +22,7 @@ public partial class OVR_Handler
     public delegate void OpenVRChange(bool connected);
     public delegate void StandbyChange(bool inStandbyMode);
     public delegate void DashboardChange(bool open);
-
+    public delegate void OverlayAppChange(bool open);
     public delegate void ChaperoneChange();
 
     private void DigestEvent(VREvent_t pEvent) 

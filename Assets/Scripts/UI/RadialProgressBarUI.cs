@@ -54,7 +54,7 @@ namespace Lux.UI
 
         void Awake()
         {
-            lux = LuxManager.Instance;
+            lux = LuxManager.Instance; // TODO: refactor
 
             sunriseBar = Instantiate(LoadingBarPrefab, transform);
             dayTimeBar = Instantiate(LoadingBarPrefab, transform);

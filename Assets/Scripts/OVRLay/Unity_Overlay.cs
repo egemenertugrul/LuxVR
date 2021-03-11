@@ -37,6 +37,10 @@ public class Unity_Overlay : MonoBehaviour
 
     [Space(10)]
 
+    public CanvasGroup canvasGroup;
+
+    [Space(10)]
+
     public Camera cameraForTexture;
     public int renderTexWidthOverride = 0;
     public int renderTexHeightOverride = 0;
@@ -97,9 +101,8 @@ public class Unity_Overlay : MonoBehaviour
 
     [Space(10)]
 
-    public bool isVisible = true;
+    public bool isVisible = false;
     public bool onlyShowInDashboard = false;
-
 
     [HideInInspector] public bool lastVisible = false;
     [HideInInspector] private bool isDashboardOpen = true;
@@ -154,7 +157,6 @@ public class Unity_Overlay : MonoBehaviour
     private float reverseAspect = 0f;
 
     private Color lastChaperoneColor = Color.black;
-
 
     // Some methods to make UI stuff easier
     public void ToggleEnable()
@@ -227,6 +229,8 @@ public class Unity_Overlay : MonoBehaviour
             textureBounds.vMax = 0;
 
             // Testing out some event based stuff
+            overlay.onVisibilityChange += (b) => { ovrHandler.onOverlayAppChange(b); };
+
             overlay.onVisibilityChange += OnVisChange;
             ovrHandler.onDashboardChange += OnDashBoardChange;
 
@@ -250,6 +254,12 @@ public class Unity_Overlay : MonoBehaviour
 
             cameraTexture = new RenderTexture(width, height, 24);
             cameraTexture.name = "Overlay RenderTexture";
+
+            cameraTexture.vrUsage = VRTextureUsage.None;
+            cameraTexture.filterMode = FilterMode.Point;
+            cameraTexture.depth = 0;
+            cameraTexture.antiAliasing = 1;
+            cameraTexture.anisoLevel = 0;
 
             if (highQualityRenderTex)
             {
@@ -334,37 +344,38 @@ public class Unity_Overlay : MonoBehaviour
             isDashboardOpen = ovrHandler.Overlay.IsDashboardVisible();
         }
 
-        if (onlyShowInDashboard && !isDashboardOpen)
-        {
-            if (isVisible)
-                isVisible = false;
-        }
-        else if (onlyShowInDashboard && isDashboardOpen)
-        {
-            if (!isVisible)
-                isVisible = true;
-        }
-
         UpdateOpts();
 
         if (!enabled)
             return;
 
-        UpdateOverlayThumbnail();
+        //UpdateOverlayThumbnail();
 
-        if (useChaperoneColor)
+        //if (useChaperoneColor)
+        //{
+        //    Color chapCol = GetChaperoneColor();
+        //    if (chapCol != lastChaperoneColor)
+        //    {
+        //        overlay.overlayColor = chapCol;
+        //        lastChaperoneColor = chapCol;
+        //    }
+        //}
+        //else if (lastChaperoneColor != Color.black)
+        //{
+        //    overlay.overlayColor = colorTint;
+        //    lastChaperoneColor = Color.black;
+        //}
+
+
+        if (!isDashboardOpen || !isVisible)
         {
-            Color chapCol = GetChaperoneColor();
-            if (chapCol != lastChaperoneColor)
-            {
-                overlay.overlayColor = chapCol;
-                lastChaperoneColor = chapCol;
-            }
-        }
-        else if (lastChaperoneColor != Color.black)
+            if (canvasGroup)
+                canvasGroup.alpha = 0;
+            return;
+        } else
         {
-            overlay.overlayColor = colorTint;
-            lastChaperoneColor = Color.black;
+            if (canvasGroup)
+                canvasGroup.alpha = 1;
         }
 
         UpdateTexture();
@@ -382,6 +393,11 @@ public class Unity_Overlay : MonoBehaviour
     {
         if (!overlay.created)
             return;
+
+        if (!isVisible)
+        {
+            return;
+        }
 
         if (cameraForTexture)
         {
