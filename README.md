@@ -8,7 +8,7 @@
 [![](https://img.shields.io/github/tag/egemenertugrul/LuxVR)](https://github.com/egemenertugrul/LuxVR/tags)
 [![](https://img.shields.io/github/issues/egemenertugrul/LuxVR)](https://github.com/egemenertugrul/LuxVR/issues)
 ![unity version](https://img.shields.io/badge/unity%20version-2019.3.1f1-green.svg)
-[![donate](https://img.shields.io/badge/donate-$$$-purple.svg)](###Donation)
+[![donate](https://img.shields.io/badge/donate-$$$-purple.svg)](#donation)
 <!-- [![](https://img.shields.io/github/release/egemenertugrul/LuxVR) ](https://github.com/egemenertugrul/LuxVR/releases) -->
 
 ## Overview
@@ -79,6 +79,6 @@ OR
   
 ## License
 
-LuxVR is released under terms of the [GPL v3](https://github.com/egemenertugrul/LuxVR/LICENSE.md) license.
+LuxVR is released under terms of the [GPL v3](https://github.com/egemenertugrul/LuxVR/LICENSE) license.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/GPLv3_Logo.svg" width="15%">
