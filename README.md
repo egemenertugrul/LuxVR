@@ -8,8 +8,8 @@
 [![](https://img.shields.io/github/tag/egemenertugrul/LuxVR)](https://github.com/egemenertugrul/LuxVR/tags)
 [![](https://img.shields.io/github/issues/egemenertugrul/LuxVR)](https://github.com/egemenertugrul/LuxVR/issues)
 ![unity version](https://img.shields.io/badge/unity%20version-2019.3.1f1-green.svg)
-[![donate](https://img.shields.io/badge/donate-$$$-purple.svg)](#donation)
-<!-- [![](https://img.shields.io/github/release/egemenertugrul/LuxVR) ](https://github.com/egemenertugrul/LuxVR/releases) -->
+[![donate](https://img.shields.io/badge/donate-$-purple.svg)](#donation)
+![license](https://img.shields.io/badge/license-GPLv3-red)
 
 ## Overview
 <p style='text-align: justify;'>
