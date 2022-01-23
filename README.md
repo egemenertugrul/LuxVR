@@ -38,20 +38,22 @@ Community TODO List:
 
 | HMD | Status | Known Issues |
 |-|-|-|
-| HTC Vive | 🗹 | - |
-| Huawei VR2 + Nolo CV1 | 🗹 | UI Sliders do not work as intended. See [this](https://github.com/benotter/OVRLay/issues/4). |
-| Valve Index | ☐ | - |
+| HTC Vive | 🗹 | * |
+| Huawei VR2 + Nolo CV1 | 🗹 | * |
+| Valve Index | 🗹 | * |
 | HTC Vive Pro | ☐ | - |
 | HTC Vive Cosmos | ☐ | - |
 | Oculus Rift | ☐ | - |
 | Oculus Rift S | ☐ | - |
+
+\* UI Sliders do not work as intended. See [this](https://github.com/benotter/OVRLay/issues/4).
 
 - Port to other platforms/operating systems. 
 
 | Platform | Status | Known Issues |
 |-|-|-|
 | Windows | 🗹 | - |
-| Linux | ☐ | - |
+| Linux | ☐ | [Porting](https://github.com/egemenertugrul/LuxVR/issues/1) |
 | Mac OS | ☐ | - |
 | Quest/Sidequest | ☐ | - |
 
